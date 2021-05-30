@@ -1,0 +1,48 @@
+h1 {
+    background-color: blue;
+    padding: 10px 0 20px 0;
+}
+
+
+/* City Search */
+
+.city-search h2 {
+    margin: 10px 0;
+}
+
+.city-search input {
+    margin: 10px 0;
+}
+.city-search button {
+    margin: 10px 0;
+}
+
+#search-history {
+    border-top: 1px solid grey;
+    margin: 10px 0;
+    padding-top: 10px;
+}
+
+/* Current Weather Display */
+.current-weather {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.current-weather h2 {
+    display: inline-block;
+}
+
+#uv-span {
+    padding: 5px;
+}
+
+
+/* Forecast Cards */
+.forecast h3 {
+    margin: 10px 0;
+}
+
+.forecast-card {
+    background-color: darkblue;
+}
