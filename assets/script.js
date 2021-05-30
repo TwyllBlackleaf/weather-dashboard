@@ -72,6 +72,23 @@ var getWeather = function(city, lat, long) {
                     uvSpanEl.textContent = uvIndex;
 
                     // Change the bg color of the UV Index span depending on severity
+                    uvIndex = parseInt(uvIndex);
+                    if (uvIndex < 3) {
+                        uvSpanEl.classList.remove("moderate", "high", "very-high", "extreme");
+                        uvSpanEl.classList.add("low");
+                    } else if (uvIndex < 6) {
+                        uvSpanEl.classList.remove("low", "high", "very-high", "extreme");
+                        uvSpanEl.classList.add("moderate");
+                    } else if (uvIndex < 8) {
+                        uvSpanEl.classList.remove("low", "moderate", "very-high", "extreme");
+                        uvSpanEl.classList.add("high");
+                    } else if (uvIndex < 11) {
+                        uvSpanEl.classList.remove("low", "moderate", "high", "extreme");
+                        uvSpanEl.classList.add("very-high");
+                    } else {
+                        uvSpanEl.classList.remove("low", "moderate", "high", "very-high");
+                        uvSpanEl.classList.add("extreme");
+                    }
 
                     // Display forecast in forecast cards
                 })

@@ -37,6 +37,26 @@ h1 {
     padding: 5px;
 }
 
+.low {
+    background-color: green;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.high {
+    background-color: orange;
+}
+
+.very-high {
+    background-color: red;
+}
+
+.extreme {
+    background-color: violet;
+}
+
 
 /* Forecast Cards */
 .forecast h3 {
