@@ -58,12 +58,32 @@ var getWeather = function(city, lat, long) {
                     console.log(data);
 
                     // Display current weather in current-weather div
+                    var tempSpanEl = document.querySelector("#temp-span");
+                    tempSpanEl.textContent = data.current.temp;
+
+                    var windSpanEl = document.querySelector("#wind-span");
+                    windSpanEl.textContent = data.current.wind_speed;
+
+                    var humiditySpanEl = document.querySelector("#humidity-span");
+                    humiditySpanEl.textContent = data.current.humidity;
+
+                    var uvSpanEl = document.querySelector("#uv-span");
+                    var uvIndex = data.current.uvi;
+                    uvSpanEl.textContent = uvIndex;
+
+                    // Change the bg color of the UV Index span depending on severity
 
                     // Display forecast in forecast cards
                 })
         })
 
     
+}
+
+var loadSaved = function() {
+    // load localStorage and parse back to array
+    // for loop to make a button for each item in search history
+    // give each button an id of i
 }
 
 var savedWeather = function() {
