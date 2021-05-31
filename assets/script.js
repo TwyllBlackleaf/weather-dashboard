@@ -146,7 +146,7 @@ var loadSaved = function() {
             var newButton = document.createElement("button");
             newButton.textContent = searchHistory[i].cityName;
             newButton.setAttribute("id", i);
-            newButton.setAttribute("class", "btn history-button w-100");
+            newButton.setAttribute("class", "btn history-button text-dark w-100");
             searchHistoryContainer.appendChild(newButton);
         }
     }
