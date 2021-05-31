@@ -120,7 +120,6 @@ var getWeather = function(city, lat, long) {
                         var forecastHumiditySpanEl = document.querySelector(`#forecast-humidity-span-${i}`);
                         forecastHumiditySpanEl.textContent = data.daily[i].humidity;
                     }
-
                 })
         })
 
