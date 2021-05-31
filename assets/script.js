@@ -15,11 +15,9 @@ var searchHistoryContainer = document.querySelector("#search-history");
 // Functions
 var searchWeather = function(event) {
     event.preventDefault();
-    console.log("search");
 
     // Get the input from #search-input
     input = searchInputEl.value;
-    console.log(input);
 
     // Geocode it to get latitude and longitude
     fetch(`https://api.geocod.io/v1.6/geocode?q=${input}&api_key=21d7d19560980625866b0b6b82569b6b66b15d6&limit=1`)
@@ -40,7 +38,6 @@ var searchWeather = function(event) {
 
                      // append the cityObj to the array of search history buttons
                      searchHistory.push(cityObj);
-                     console.log(searchHistory);
 
                     // store the array in localStorage
                     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
@@ -62,8 +59,6 @@ var getWeather = function(city, lat, long) {
         .then(function(response) {
             response.json()
                 .then(function(data) {
-                    console.log(data);
-
                     // Display current weather in current-weather div
                     var currentIconEl = document.querySelector("#current-icon");
                     currentIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`);
@@ -135,11 +130,9 @@ var getWeather = function(city, lat, long) {
 var loadSaved = function() {
     searchHistoryContainer.textContent = "";
 
-    if (searchHistory) {
-        var loadedArray = localStorage.getItem("searchHistory");
+    var loadedArray = localStorage.getItem("searchHistory");
+    if (loadedArray) {
         searchHistory = JSON.parse(loadedArray);
-
-        console.log(searchHistory);
 
         // create buttons for each city in searchHistory
         for (i = 0; i < searchHistory.length; i++) {
