@@ -1,12 +1,8 @@
 // Global Variables
 var searchTerm = "";
-var cityObj = {
-    input: "",
-    cityName: "",
-    lat: "",
-    long: "",
-};
 var searchHistory = [];
+
+var input = "";
 
 
 // Document Elements
@@ -14,6 +10,7 @@ var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var cityNameEl = document.querySelector("#city-name");
 var dateSpanEl = document.querySelector("#date-span");
+var searchHistoryContainer = document.querySelector("#search-history");
 
 // Functions
 var searchWeather = function(event) {
@@ -21,23 +18,32 @@ var searchWeather = function(event) {
     console.log("search");
 
     // Get the input from #search-input
-    cityObj.input = searchInputEl.value;
-    console.log(cityObj.input);
+    input = searchInputEl.value;
+    console.log(input);
 
     // Geocode it to get latitude and longitude
-    fetch(`https://api.geocod.io/v1.6/geocode?q=${cityObj.input}&api_key=21d7d19560980625866b0b6b82569b6b66b15d6&limit=1`)
+    fetch(`https://api.geocod.io/v1.6/geocode?q=${input}&api_key=21d7d19560980625866b0b6b82569b6b66b15d6&limit=1`)
         .then(function(response) {
             response.json()
                 .then(function(data) {
                     //to do: make sure something actually got returned
 
+                    var cityObj = {
+                        cityName: "",
+                        lat: "",
+                        long: "",
+                    };
+
                     cityObj.cityName = data.results[0].address_components.city; // to do: add error checking to make sure there IS a city
                     cityObj.lat = data.results[0].location.lat;
                     cityObj.long = data.results[0].location.lng;
 
-                     // append the search term, city name, lat, and long to the array of search history buttons
+                     // append the cityObj to the array of search history buttons
+                     searchHistory.push(cityObj);
+                     console.log(searchHistory);
 
                     // store the array in localStorage
+                    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
                     // call getWeather with said city, latitude, and longitude
                     getWeather(cityObj.cityName, cityObj.lat, cityObj.long);
@@ -48,7 +54,7 @@ var searchWeather = function(event) {
 }
 
 var getWeather = function(city, lat, long) {
-    // set the city name to display in relevant places
+    // set the city name to display in relevant place
     cityNameEl.textContent = city;
 
     // Use lat and long to find weather for a location
@@ -123,21 +129,42 @@ var getWeather = function(city, lat, long) {
                 })
         })
 
-    
+    loadSaved();  
 }
 
 var loadSaved = function() {
-    // load localStorage and parse back to array
-    // for loop to make a button for each item in search history
-    // give each button an id of i
+    searchHistoryContainer.textContent = "";
+
+    if (searchHistory) {
+        var loadedArray = localStorage.getItem("searchHistory");
+        searchHistory = JSON.parse(loadedArray);
+
+        console.log(searchHistory);
+
+        // create buttons for each city in searchHistory
+        for (i = 0; i < searchHistory.length; i++) {
+            var newButton = document.createElement("button");
+            newButton.textContent = searchHistory[i].cityName;
+            newButton.setAttribute("id", i);
+            newButton.setAttribute("class", "btn history-button w-100");
+            searchHistoryContainer.appendChild(newButton);
+        }
+    }
 }
 
-var savedWeather = function() {
-    // Use id of button to get corresponding saved weather object from the array
-    // call getWeather() with the lat and long from that object
+var savedWeather = function(event) {
+    if (event.target.matches(".history-button")) {
+        // get id of the button that was clicked
+        tempId = event.target.id;
+
+        // get weather based on the object in the searchHistory array at an index corresponding to the id
+        getWeather(searchHistory[tempId].cityName, searchHistory[tempId].lat, searchHistory[tempId].long);
+    }
 }
 
-// Event Listeners
+// Loadup and Event Listeners
+loadSaved();
 searchFormEl.addEventListener("submit", searchWeather); 
+searchHistoryContainer.addEventListener("click", savedWeather);
 
-// Add a click event listener to the dynamically generated search history buttons
+
