@@ -2,7 +2,7 @@
 
 A weather dashboard that saves your search history for easy future reference.
 
-![A screenshot of the program, currently showing the weather in Nashville and a 5-day forecast](screenshot.png)
+![A screenshot of the program, currently showing the weather in Nashville and a 5-day forecast](./assets/screenshot.png)
 
 ## Site Link
 
