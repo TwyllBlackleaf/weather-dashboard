@@ -94,20 +94,26 @@ var getWeather = function(city, lat, long) {
                     }
 
                     // Create a moment() object that translates from UNIX time
-                    // currentDate = moment(parseInt(data.current.dt + "000"));
+                    currentDate = moment(parseInt(data.current.dt + "000"));
 
-                    // dateSpanEl.textContent = currentDate.format("M/D/YYYY");
+                    dateSpanEl.textContent = currentDate.format("M/D/YYYY");
                     
 
                     // Display forecast in forecast cards
                     for (var i = 0; i < 5; i++) {
-                        // var forecastDateSpanEl = document.querySelector(`.forecast-date-span-${i}`);
-                        // forecastDateSpanEl.textContent = currentDate.add(1, "days").format("M/D/YYYY");
+                        var forecastDateSpanEl = document.querySelector(`.forecast-date-span-${i}`);
+                        forecastDateSpanEl.textContent = currentDate.add(1, "days").format("M/D/YYYY");
 
                         // add icon
 
                         var forecastTempSpanEl = document.querySelector(`#forecast-temp-span-${i}`);
                         forecastTempSpanEl.textContent = data.daily[i].temp.day;
+
+                        var forecastWindSpanEl = document.querySelector(`#forecast-wind-span-${i}`);
+                        forecastWindSpanEl.textContent = data.daily[i].wind_speed;
+
+                        var forecastHumiditySpanEl = document.querySelector(`#forecast-humidity-span-${i}`);
+                        forecastHumiditySpanEl.textContent = data.daily[i].humidity;
                     }
 
                 })
