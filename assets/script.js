@@ -55,13 +55,13 @@ var getWeather = function(city, lat, long) {
     cityNameEl.textContent = city;
 
     // Use lat and long to find weather for a location
-    fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely,hourly,alerts&appid=b24e2873602c0d7d47d5fbf2c9c9524b`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&exclude=minutely,hourly,alerts&appid=b24e2873602c0d7d47d5fbf2c9c9524b`)
         .then(function(response) {
             response.json()
                 .then(function(data) {
                     // Display current weather in current-weather div
                     var currentIconEl = document.querySelector("#current-icon");
-                    currentIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`);
+                    currentIconEl.setAttribute("src", `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`);
 
                     var tempSpanEl = document.querySelector("#temp-span");
                     tempSpanEl.textContent = data.current.temp;
@@ -109,7 +109,7 @@ var getWeather = function(city, lat, long) {
                         forecastDateSpanEl.textContent = currentDate.add(1, "days").format("M/D/YYYY");
 
                         var forecastIconEl = document.querySelector(`#forecast-icon-${i}`);
-                        forecastIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`)
+                        forecastIconEl.setAttribute("src", `https://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`)
 
                         var forecastTempSpanEl = document.querySelector(`#forecast-temp-span-${i}`);
                         forecastTempSpanEl.textContent = data.daily[i].temp.day;
