@@ -59,6 +59,9 @@ var getWeather = function(city, lat, long) {
                     console.log(data);
 
                     // Display current weather in current-weather div
+                    var currentIconEl = document.querySelector("#current-icon");
+                    currentIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`);
+
                     var tempSpanEl = document.querySelector("#temp-span");
                     tempSpanEl.textContent = data.current.temp;
 
@@ -104,7 +107,8 @@ var getWeather = function(city, lat, long) {
                         var forecastDateSpanEl = document.querySelector(`.forecast-date-span-${i}`);
                         forecastDateSpanEl.textContent = currentDate.add(1, "days").format("M/D/YYYY");
 
-                        // add icon
+                        var forecastIconEl = document.querySelector(`#forecast-icon-${i}`);
+                        forecastIconEl.setAttribute("src", `http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png`)
 
                         var forecastTempSpanEl = document.querySelector(`#forecast-temp-span-${i}`);
                         forecastTempSpanEl.textContent = data.daily[i].temp.day;
